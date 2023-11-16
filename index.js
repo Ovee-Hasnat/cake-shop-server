@@ -11,6 +11,7 @@ const categoryRoute = require("./routes/category");
 var cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 dotenv.config();
 
@@ -18,7 +19,6 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("DB Connection Successfull"))
   .catch((err) => console.log(err));
-
 
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);

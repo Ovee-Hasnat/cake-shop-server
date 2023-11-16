@@ -13,7 +13,6 @@ router.post("/login", async (req, res) => {
 
     if (!user) {
       //Registering new account
-
       try {
         const savedUser = await newUser.save();
 
@@ -28,7 +27,7 @@ router.post("/login", async (req, res) => {
         let loggedinUser = { ...savedUser._doc, accessToken };
         res.status(201).json(loggedinUser);
       } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json("New user creation error");
       }
     } else {
       //Login into account
@@ -44,7 +43,8 @@ router.post("/login", async (req, res) => {
       res.status(200).json({ ...user._doc, accessToken });
     }
   } catch (error) {
-    res.status(500).json(error);
+    console.log(error);
+    res.status(500).json("Sign in error");
   }
 });
 
